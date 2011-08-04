@@ -1,9 +1,11 @@
 $(function() {
 
-	var lon = 12.451196667,
-		lat = 42.374583333,
-		zoom = 15,
-		TT = 4000;
+	var lon = 12.451196, lat = 42.374583,  //casa
+		lon = 234827.002046, lat =4461518.840733,	//centro mondo
+		zoom = 1,
+		TT = 4000,
+		loop = false,
+		firstloop = true;
 	var map$ = $('#map'), 
 		mapOL;
 	var wgs84 = new OpenLayers.Projection("EPSG:4326"),
@@ -22,30 +24,65 @@ $(function() {
 	var markers = new OpenLayers.Layer.Markers("Clients");
     mapOL.addLayers([markers]);
 	
-	mapOL.setCenter( new OpenLayers.LonLat(lon, lat) );  //centro iniziale
-		
-	function addClient(lonlat,ip) {	//eseguito al click e moveend su openlayers
-		var size = new OpenLayers.Size(21,25);
-	    var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-	    var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
-	    lonlat = lonlat.transform( wgs84, mapOL.getProjectionObject());
-	    markers.addMarker(new OpenLayers.Marker(lonlat,icon));
-    	//mapOL.zoomToExtent( markers.getDataExtent() );//box.transform( wgs84, mapOL.getProjectionObject()));
-    	$('#log').prepend(ip+': '+'<br>');
-	}
-	var ii = 0;
-	var tt = setInterval(function() {
-	if(++ii%3) $('#log').empty();//clearInterval(tt);
+	mapOL.setCenter( new OpenLayers.LonLat(lon, lat) ,zoom );  //centro iniziale
+
+	for(c in mapOL.controls)
+		if(mapOL.controls[c].CLASS_NAME=="OpenLayers.Control.Attribution")
+			mapOL.controls[c].destroy();
+			
+	function addClients() {	//eseguito al click e moveend su openlayers
+
+		if(loop || firstloop)
 		$.getJSON('coords.php',function(json) {
 			markers.clearMarkers();
 			for(c in json)
-				addClient( new OpenLayers.LonLat(parseFloat(json[c][1]), parseFloat(json[c][2])) ,json[c][0] );
-			$('#log').prepend('-------------<br>');
+			{
+			    var ip = json[c][0];
+			    var lonlat = new OpenLayers.LonLat(parseFloat(json[c][1]), parseFloat(json[c][2]));
+				var size = new OpenLayers.Size(21,25);
+				var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+				var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
+				lonlat = lonlat.transform( wgs84, mapOL.getProjectionObject());
+				markers.addMarker(new OpenLayers.Marker(lonlat,icon));
+				$('#log').prepend(ip+': '+',');
+			}
+			$('#log').prepend('<hr>');
 		});
-	},TT);
+		
+		setTimeout(function(){ addClients(); }, TT);  //loop ricorsivo a intervallo variabile
+	}
+
+	$.ajaxSetup({async:false});
+
+	$('#loader')
+	.ajaxStart(function() {
+		$(this).html('<img src="loading.gif" /> updating...');
+	})
+	.ajaxStop(function() {
+		$(this).html('&nbsp;');
+	});
+	
+	$('#loop').attr('checked',loop?'checked':false)
+	.change(function() {
+		loop = $(this).is(':checked');
+	});
+	
+	$('#tt').val(TT)
+	.bind('change mousemove',function(e) {
+		TT = parseInt($(this).val());
+	});
+	
+	$('#zoomall').click(function(e) {
+		mapOL.zoomToExtent( markers.getDataExtent() );//box.transform( wgs84, mapOL.getProjectionObject()));
+	});
+
+	addClients();
+	firstloop = false;	//start update
 
 
 });//////////document ready
+
+
 
 function isEmpty(obj) {
     for(var prop in obj) {

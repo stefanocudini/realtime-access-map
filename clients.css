@@ -1,23 +1,116 @@
-html, body { padding: 0; height: 100%; width: 100%; font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif; }
-body { margin: 4px; background: #dea; color: #562; }
-h1 { margin: 0; padding: 0px; font-size: 18px; }
-fieldset {float:left; border: 1px solid #ab7; }
-legend,label {font-size:small; }
-input,select {background: #cda; border: 1px solid #ab7; }
-h1,h4 { margin:0; }
-ul,li {margin:0; }
-#map_wrap {float:left; }
-#map { height: 400px; width:800px; border: 1px solid #ab7;  }
-#status {text-align:left; padding:2px;clear:both; border:1px solid #888;border-top:none; height:1em; background:#ddd; font-size:.85em; line-height:.85em; }
-#log_wrap {float: left; width:400px; padding-left:20px }
-#dati { padding:1em; border:1px solid blue; background-color: #ddd; }
-#log {overflow:scroll padding:1em; border:1px solid #0f0;background-color: #efe; font-size:small;}
-#loader {text-align:center;height:18px;clear:both; }
+html, body {
+	 padding: 0;
+	 height: 100%;
+	 width: 100%;
+	 font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif;
+	 }
 
-.olPopup {
-border-radius: 0.25em;    /* css3 */
--moz-border-radius: 0.25em;    /* firefox */
--webkit-border-radius: 0.25em; /* safari */
+body {
+ margin: 4px;
+ background: #dea;
+ color: #562;
+ }
+
+h1 {
+ margin: 0;
+ padding: 0px;
+ font-size: 18px;
+ }
+
+fieldset {
+float:left;
+ border: 1px solid #ab7;
+ }
+
+legend,label {
+font-size:small;
+ }
+
+input,select {
+background: #cda;
+ border: 1px solid #ab7;
+ }
+
+h1,h4 {
+ margin:0;
+ }
+
+ul,li {
+margin:0;
+ }
+
+#map_wrap {
+clear:both;
+float:left;
+ }
+#tool {
+margin:2px;
+float:left;
+clear:both;
 }
-.olPopupContent {}
-.olPopupCloseBox {}
+#loader {
+float:right;
+margin:0 20px
+}
+#map {
+ height:400px;
+ width:500px;
+ border: 1px solid #ab7;
+ }
+
+#status {
+text-align:left;
+ padding:2px;
+clear:both;
+ border:1px solid #888;
+border-top:none;
+ height:1em;
+ background:#ddd;
+ font-size:.85em;
+ line-height:.85em;
+ }
+hr {
+border:none;
+border-bottom:1px solid #ab7;
+}
+#log_wrap {
+position:absolute;
+left:500px;
+right:0;
+float: left;
+ margin:20px; }
+
+#dati {
+ width:300px;
+ padding:1em;
+ border:1px solid #ab7;
+ background-color: #efe;
+ }
+
+#log {
+overflow-y:scroll;
+max-height:280px;
+padding:1em;
+ border:1px solid #ab7;
+background-color: #efe;
+ font-size:small;
+}
+#copy {
+	position:fixed;
+	top:4px;
+	right:8px;
+	color:#888;
+	z-index:4000;
+	font-size:small;	
+}
+ .olPopup {
+	 border-radius: 0.25em;
+	 -moz-border-radius: 0.25em;
+	 -webkit-border-radius: 0.25em;
+	 }
+
+ .olPopupContent {
+}
+
+ .olPopupCloseBox {
+}

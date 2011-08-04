@@ -8,37 +8,38 @@
     </style>
   </head>
   <body>
-  <div style="text-align:center">
-  <h1>Sistema di tracciamento posizione geografica dei client HTTP collegati</h1> 
-  </div>
+	  <div style="text-align:center">
+	  	<h1>Tracciamento posizione geografica dei client HTTP collegati</h1> 
+	  </div>
 
-		<label>Refresh
-		<select id="tt">
-		<? for($t=2;$t<=10;$t++): ?>
-		<option value="<?=$t?>"><?=$t?></option>
+	<div id="tool">
+		<label><input id="loop" type="checkbox" />Refresh</label>
+		<label><select id="tt">
+		<? for($t=0;$t<=20;$t++): ?>
+		<option value="<?=$t*1000?>"><?=$t?></option>
 		<? endfor; ?>
-		</select> s </label>&nbsp;
-		
-	  <div id="map_wrap">
-    	<div id="loader">&nbsp;</div>
-      	<div id="map"></div>
-	  	<div id="coords"></div>
-	  	<div id="status"></div>
-	  </div>
-	  <div id="log_wrap">
-	  	<h4> Dati dell'ultimo punto selezionato: </h4>
-	  	<div id="dati"></div>	
-      	<h4> Debug:</h4>
-	  	<div id="log"></div>  
-	  </div>
-	  <div style="clear:both"></div>
-	  </div>
-  	  <div style="clear:both">&nbsp;</div>
-  	  <div style="font-size:small;text-align:center">powered by Stefano Cudini<br /><br /></div>
+		</select> s &nbsp;</label>
+		<input id="zoomall" type="button" value="Zoom tutto" />
+		<div id="loader">&nbsp;</div>	
+	</div>
+	<div id="map_wrap">
+		<div id="map"></div>	
+		<div id="coords"></div>
+		<!--div id="status"></div-->
+	</div>
+	<div id="log_wrap">
+		<h4> Client selezionato: </h4>
+		<div id="dati"></div>
+		<br />
+		<h4> Lista:</h4>
+		<div id="log"></div>  
+	</div>
+	
+	<div id="copy">powered by Stefano Cudini</div>
 
-		<script src="../openlayers/OpenLayers.js"></script>
-		<script src="../../jquery-1.4.2.min.js"></script>
-		<script src="clients.devel.js" ></script>  	  
+	<script src="../openlayers/OpenLayers.js"></script>
+	<script src="../../jquery-1.4.2.min.js"></script>
+	<script src="clients.devel.js" ></script>  	  
   </body>
 </html>
 
