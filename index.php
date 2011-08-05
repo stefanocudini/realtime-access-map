@@ -8,11 +8,14 @@
     </style>
   </head>
   <body>
-	  <div style="text-align:center">
 	  	<h1>Tracciamento posizione geografica dei client HTTP collegati</h1> 
-	  </div>
 
 	<div id="tool">
+			<select id="dom">
+				<option value="ryuzan.it">ryuzan.it</option>
+				<option value="easyblog.it" selected="selected">easyblog.it</option>
+				<option value="stefanorossini.it">stefanorossini.it</option>
+			</select>
 		<label><input id="loop" type="checkbox" />Refresh</label>
 		<label><select id="tt">
 		<? for($t=0;$t<=20;$t++): ?>
@@ -26,13 +29,12 @@
 		<div id="map"></div>	
 		<div id="coords"></div>
 		<!--div id="status"></div-->
-	</div>
-	<div id="log_wrap">
-		<h4> Client selezionato: </h4>
 		<div id="dati"><div></div></div>
-		<br />
-		<h4> Lista:</h4>
-		<div id="log"></div>  
+	</div>
+	
+	<div id="log_wrap">	
+	<h4> Lista:</h4>
+	<div id="log"></div>  
 	</div>
 	
 	<div id="copy">powered by Stefano Cudini</div>

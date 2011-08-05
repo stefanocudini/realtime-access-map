@@ -3,13 +3,13 @@ header("Content-type: text/plain");
 require('clients.php');
 
 $KEY = 'ac735b1e635d4ec5b0ba271b287eb42c2161eabfbbc53894cb6ea642c210befd';
-
+$dominio = isset($_GET['d']) ? trim($_GET['d']) : 'easyblog.it';
 #$url = "http://api.ipinfodb.com/v2/ip_query.php?key=$KEY&output=json&timezone=&ip=";
 $url = "http://67.212.77.12/v2/ip_query.php?key=$KEY&output=json&timezone=&ip=";
 
 #echo "point	title	description	iconSize	iconOffset	icon\r\n";
 $hosts = array();
-foreach($ips as $p)
+foreach($ips[$dominio] as $p)
 {
 	$addr = $p[0];
 	$r = explode(' ', $p[1]);

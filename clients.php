@@ -26,10 +26,17 @@ foreach($trs as $tr)
 	$req = $tr->find('td',-1)->innertext;
 	$vhost = $tr->find('td',-2)->innertext;
 	$mode = $tr->find('td',3)->innertext;
-	if($ip!='127.0.0.1' and $ip!=$_SERVER['REMOTE_ADDR'] and $ip!='?') $ips[]= array($ip,$req);
+	if($ip!='127.0.0.1' and $ip!=$_SERVER['REMOTE_ADDR'] and $ip!='?')
+		$ips[$vhost][]= array($ip,$req);
 }
-if( basename(__FILE__)==basename($_SERVER['PHP_SELF']))
-	foreach($ips as $p)
-		echo implode(' ',$p).'<br />';
-
+if( basename(__FILE__)==basename($_SERVER['PHP_SELF']) )
+{
+	foreach($ips as $dom=>$P)
+	{
+		echo $dom."<br>";
+		foreach($P as $p)
+			echo implode(' ',$p).'<br />';
+		echo "<hr>";
+	}
+}
 ?>

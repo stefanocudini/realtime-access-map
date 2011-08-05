@@ -35,9 +35,12 @@ $(function() {
 		var content='';
 		for(d in feature.attributes)
 			content += d!='col'?(d +': ' + feature.attributes[d] +'<br />'):'';
-		$('#dati div').html(content).hide().slideDown();
+		$('#dati').show().children().html(content);
 	}
-	var pointSelect = new OpenLayers.Control.SelectFeature([clientLayer], {hover:true, onSelect: onPointSelect });
+	function onPointUnSelect(feature) {  //evento onselect feature, del layer di selezione
+		$('#dati').hide();
+	}
+	var pointSelect = new OpenLayers.Control.SelectFeature([clientLayer], {hover:true, onSelect: onPointSelect, onUnselect:onPointUnSelect });
 	mapOL.addControl(pointSelect);
 	pointSelect.activate();
 	
@@ -45,7 +48,7 @@ $(function() {
 
 		if(loop || firstloop)
 		{
-			$.getJSON('coords.php', function(json) {
+			$.getJSON('coords.php',{d: $('#dom').val()}, function(json) {
 				clientLayer.removeAllFeatures();
 				var points = [];
 				for(c in json)
