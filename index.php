@@ -29,7 +29,7 @@
 	</div>
 	<div id="log_wrap">
 		<h4> Client selezionato: </h4>
-		<div id="dati"></div>
+		<div id="dati"><div></div></div>
 		<br />
 		<h4> Lista:</h4>
 		<div id="log"></div>  

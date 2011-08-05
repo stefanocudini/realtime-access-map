@@ -21,34 +21,42 @@ $(function() {
 
 	var osmLayer = new OpenLayers.Layer.OSM("OpenStreetMap");		
 	mapOL.addLayers([osmLayer]);
-	var markers = new OpenLayers.Layer.Markers("Clients");
-    mapOL.addLayers([markers]);
 	
 	mapOL.setCenter( new OpenLayers.LonLat(lon, lat) ,zoom );  //centro iniziale
 
 	for(c in mapOL.controls)
 		if(mapOL.controls[c].CLASS_NAME=="OpenLayers.Control.Attribution")
 			mapOL.controls[c].destroy();
-			
+
+	var clientLayer = new OpenLayers.Layer.Vector('Clients', {styleMap: clientStyle});
+	mapOL.addLayers([clientLayer]);
+
+	function onPointSelect(feature) {  //evento onselect feature, del layer di selezione
+		var content='';
+		for(d in feature.attributes)
+			content += d!='col'?(d +': ' + feature.attributes[d] +'<br />'):'';
+		$('#dati div').html(content).hide().slideDown();
+	}
+	var pointSelect = new OpenLayers.Control.SelectFeature([clientLayer], {hover:true, onSelect: onPointSelect });
+	mapOL.addControl(pointSelect);
+	pointSelect.activate();
+	
 	function addClients() {	//eseguito al click e moveend su openlayers
 
 		if(loop || firstloop)
-		$.getJSON('coords.php',function(json) {
-			markers.clearMarkers();
-			for(c in json)
-			{
-			    var ip = json[c][0];
-			    var lonlat = new OpenLayers.LonLat(parseFloat(json[c][1]), parseFloat(json[c][2]));
-				var size = new OpenLayers.Size(21,25);
-				var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-				var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',size,offset);
-				lonlat = lonlat.transform( wgs84, mapOL.getProjectionObject());
-				markers.addMarker(new OpenLayers.Marker(lonlat,icon));
-				$('#log').prepend(ip+': '+',');
-			}
-			$('#log').prepend('<hr>');
-		});
-		
+		{
+			$.getJSON('coords.php', function(json) {
+				clientLayer.removeAllFeatures();
+				var points = [];
+				for(c in json)
+				{
+					var p = new OpenLayers.Feature.Vector((new OpenLayers.Geometry.Point(json[c][1], json[c][2])).transform( wgs84, mapOL.getProjectionObject()));
+					p.attributes = {ip: json[c][0], req: json[c][3], city: json[c][4], col: randcolor()};
+					clientLayer.addFeatures([p]);
+				}
+			});
+		}
+
 		setTimeout(function(){ addClients(); }, TT);  //loop ricorsivo a intervallo variabile
 	}
 
@@ -73,7 +81,7 @@ $(function() {
 	});
 	
 	$('#zoomall').click(function(e) {
-		mapOL.zoomToExtent( markers.getDataExtent() );//box.transform( wgs84, mapOL.getProjectionObject()));
+		mapOL.zoomToExtent( clientLayer.getDataExtent() );//box.transform( wgs84, mapOL.getProjectionObject()));
 	});
 
 	addClients();
@@ -82,7 +90,40 @@ $(function() {
 
 });//////////document ready
 
-
+			
+var clientStyle = new OpenLayers.StyleMap({
+    "default": new OpenLayers.Style({
+            	//stroke:false,  //bordo
+                strokeColor: "#000000",
+                strokeOpacity: 1,
+                strokeWidth: 1,
+                fillColor: "${col}",//"#ee0000",
+                fillOpacity: 1,
+                pointRadius: 5,
+                fontColor: "#0000aa",
+                fontSize: "12px",
+                //fontWeight: "bold",
+                label: "${ip} ${city}",
+                labelAlign: "${right}",
+                labelXOffset: "15",
+                labelYOffset: "15",
+                pointerEvents: "visiblePainted"                
+    }),
+    "select": new OpenLayers.Style({
+                strokeColor: "#000000",
+                strokeWidth: 1,
+                fillColor: "${col}",//"#ee0000",
+                pointRadius: 8,
+                fontColor: "#0000aa",
+                fontSize: "14px",
+                //fontWeight: "bold",
+                label: "${ip} ${city}",
+                labelAlign: "${right}",
+                labelXOffset: "15",
+                labelYOffset: "15",
+                pointerEvents: "visiblePainted"                
+    })
+});
 
 function isEmpty(obj) {
     for(var prop in obj) {
