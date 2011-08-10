@@ -11,11 +11,11 @@
 	  	<h1>Tracciamento posizione geografica dei client HTTP collegati</h1> 
 
 	<div id="tool">
-			<select id="dom">
-				<option value="ryuzan.it">ryuzan.it</option>
-				<option value="easyblog.it" selected="selected">easyblog.it</option>
-				<option value="stefanorossini.it">stefanorossini.it</option>
-			</select>
+		<select id="dom">
+			<option value="ryuzan.it">ryuzan.it</option>
+			<option value="easyblog.it" selected="selected">easyblog.it</option>
+			<option value="stefanorossini.it">stefanorossini.it</option>
+		</select>
 		<label><input id="loop" type="checkbox" />Refresh</label>
 		<label><select id="tt">
 		<? for($t=0;$t<=20;$t++): ?>

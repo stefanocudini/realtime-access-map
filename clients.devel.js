@@ -3,7 +3,7 @@ $(function() {
 	var lon = 12.451196, lat = 42.374583,  //casa
 		lon = 234827.002046, lat =4461518.840733,	//centro mondo
 		zoom = 1,
-		TT = 4000,
+		TT = 6000,
 		loop = false,
 		firstloop = true;
 	var map$ = $('#map'), 
@@ -19,9 +19,9 @@ $(function() {
 	});
 	//mapOL.addControl(new OpenLayers.Control.Navigation());
 
-	var osmLayer = new OpenLayers.Layer.OSM("OpenStreetMap");		
+	var osmLayer = new OpenLayers.Layer.OSM("OpenStreetMap");
 	mapOL.addLayers([osmLayer]);
-	
+
 	mapOL.setCenter( new OpenLayers.LonLat(lon, lat) ,zoom );  //centro iniziale
 
 	for(c in mapOL.controls)
@@ -44,11 +44,10 @@ $(function() {
 	mapOL.addControl(pointSelect);
 	pointSelect.activate();
 	
-	function addClients() {	//eseguito al click e moveend su openlayers
-
-		if(loop || firstloop)
-		{
-			$.getJSON('coords.php',{d: $('#dom').val()}, function(json) {
+	function getClients() {
+		$.getJSON('coords.php',
+			{d: $('#dom').val()},
+			function(json) {
 				clientLayer.removeAllFeatures();
 				var points = [];
 				for(c in json)
@@ -58,12 +57,19 @@ $(function() {
 					clientLayer.addFeatures([p]);
 				}
 			});
+	}
+	
+	function addClients() {	//eseguito al click e moveend su openlayers
+
+		if(loop || firstloop)
+		{
+			getClients();
 		}
 
 		setTimeout(function(){ addClients(); }, TT);  //loop ricorsivo a intervallo variabile
 	}
 
-	$.ajaxSetup({async:false});
+//	$.ajaxSetup({async:false});
 
 	$('#loader')
 	.ajaxStart(function() {
@@ -71,6 +77,10 @@ $(function() {
 	})
 	.ajaxStop(function() {
 		$(this).html('&nbsp;');
+	});
+	
+	$('#dom').change(function() {
+		getClients();
 	});
 	
 	$('#loop').attr('checked',loop?'checked':false)
