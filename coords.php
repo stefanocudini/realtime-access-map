@@ -16,8 +16,7 @@ foreach($ips[$dominio] as $p)
 	$u = parse_url($r[1]);
 	$req = stripslashes($u['path']);
 	#$mode = $p[3];
-	$j = get($url.$addr);
-	$J = json_decode($j,true);
+	$J = json_decode(get($url.$addr),true);
 	$hosts[]= array($addr, (float)$J['Longitude'], (float)$J['Latitude'], $req, $J['City']);
 #	echo implode("\t",array( $J['Latitude'].','.$J['Longitude'], $addr, $req, '21,25','-10,-25','http://www.openlayers.org/dev/img/marker.png'))."\r\n";
 }

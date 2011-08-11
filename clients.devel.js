@@ -31,18 +31,71 @@ $(function() {
 	var clientLayer = new OpenLayers.Layer.Vector('Clients', {styleMap: clientStyle});
 	mapOL.addLayers([clientLayer]);
 
-	function onPointSelect(feature) {  //evento onselect feature, del layer di selezione
+/////uso di strategies
+	var style = new OpenLayers.Style({
+		pointRadius: "${radius}",
+		fillColor: "#ffcc66",
+        label: "${count}",
+        labelAlign: "${right}",
+        labelXOffset: "15",
+        labelYOffset: "15",
+		fillOpacity: 0.8,
+		strokeColor: "#cc6633",
+		strokeWidth: 2,
+		strokeOpacity: 0.8
+	}, {
+		context: {
+		    radius: function(feature) {
+		        return Math.min(feature.attributes.count, 7) + 3;
+		    }
+		}
+	});
+	var clients = new OpenLayers.Layer.Vector("Clients", {
+		strategies: [
+		    new OpenLayers.Strategy.Fixed(),
+		    new OpenLayers.Strategy.Cluster()
+		],
+		protocol: new OpenLayers.Protocol.HTTP({
+		    url: "coords2geojson.php",
+		    params: {d: $('#dom').val()},
+//		    callUserCallback: function(resp,){ $('#log')},
+		    format: new OpenLayers.Format.GeoJSON({internalProjection: mercator, externalProjection: wgs84})
+		}),
+		styleMap: new OpenLayers.StyleMap({
+		    "default": style,
+		    "select": {
+		        fillColor: "#8aeeef",
+		        strokeColor: "#32a8a9"
+		    }
+		})
+	});
+	mapOL.addLayers([clients]);
+/////uso di strategies
+
+	function onPointSelect(feature)  //evento onselect feature, del layer di selezione
+	{
 		var content='';
-		for(d in feature.attributes)
-			content += d!='col'?(d +': ' + feature.attributes[d] +'<br />'):'';
+		
+		for(c in feature.cluster)
+		{		
+			for(d in feature.cluster[c].attributes)
+				if(d!='col')
+					content += d +': ' + feature.cluster[c].attributes[d] +'<br />';
+			content += '<hr />';
+		}	
 		$('#dati').show().children().html(content);
 	}
 	function onPointUnSelect(feature) {  //evento onselect feature, del layer di selezione
-		$('#dati').hide();
+		setTimeout(function(){ $('#dati').fadeOut(); },3000);
 	}
-	var pointSelect = new OpenLayers.Control.SelectFeature([clientLayer], {hover:true, onSelect: onPointSelect, onUnselect:onPointUnSelect });
+	var pointSelect = new OpenLayers.Control.SelectFeature([clientLayer,clients], {hover:true, onSelect: onPointSelect, onUnselect:onPointUnSelect });
 	mapOL.addControl(pointSelect);
 	pointSelect.activate();
+
+	function getClients2() {
+	    clients.protocol.params.d= $('#dom').val();
+		clients.refresh();
+	}
 	
 	function getClients() {
 		$.getJSON('coords.php',
@@ -52,9 +105,11 @@ $(function() {
 				var points = [];
 				for(c in json)
 				{
-					var p = new OpenLayers.Feature.Vector((new OpenLayers.Geometry.Point(json[c][1], json[c][2])).transform( wgs84, mapOL.getProjectionObject()));
-					p.attributes = {ip: json[c][0], req: json[c][3], city: json[c][4], col: randcolor()};
-					clientLayer.addFeatures([p]);
+					var p = (new OpenLayers.Geometry.Point(json[c][1], json[c][2]));
+					var coord = p.toShortString();
+					var f = new OpenLayers.Feature.Vector(p.transform( wgs84, mapOL.getProjectionObject()));
+					f.attributes = {ip: json[c][0], url: json[c][3], city: json[c][4], coord: coord, col: randcolor()};
+					clientLayer.addFeatures([f]);
 				}
 			});
 	}
@@ -63,7 +118,7 @@ $(function() {
 
 		if(loop || firstloop)
 		{
-			getClients();
+			getClients2();
 		}
 
 		setTimeout(function(){ addClients(); }, TT);  //loop ricorsivo a intervallo variabile
@@ -73,14 +128,14 @@ $(function() {
 
 	$('#loader')
 	.ajaxStart(function() {
-		$(this).html('<img src="loading.gif" /> updating...');
+		$(this).show();
 	})
 	.ajaxStop(function() {
-		$(this).html('&nbsp;');
+		$(this).hide();
 	});
 	
 	$('#dom').change(function() {
-		getClients();
+		getClients2();
 	});
 	
 	$('#loop').attr('checked',loop?'checked':false)
@@ -98,6 +153,7 @@ $(function() {
 	});
 
 	addClients();
+	
 	firstloop = false;	//start update
 
 

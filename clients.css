@@ -1,89 +1,91 @@
 html, body {
-	 padding: 0;
-	 height: 100%;
-	 width: 100%;
-	 font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif;
-	 }
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif;
+}
 
 body {
- margin: 4px;
- background: #dea;
- color: #562;
- }
+	margin: 4px;
+	background: #dea;
+	color: #562;
+}
 
 h1 {
- margin: 0;
- padding: 0px;
- font-size: 16px;
- }
+	margin: 0;
+	padding: 0px;
+	font-size: 16px;
+}
 
 fieldset {
-float:left;
- border: 1px solid #ab7;
- }
+	float:left;
+	border: 1px solid #ab7;
+}
 
 legend,label {
-font-size:small;
- }
+	font-size:small;
+}
 
 input,select {
-background: #cda;
- border: 1px solid #ab7;
- }
+	background: #cda;
+	border: 1px solid #ab7;
+}
 
 h1,h2,h4 {
- margin:0;
- }
+	margin:0;
+}
 
 ul,li {
-margin:0;
- }
+	margin:0;
+}
 
 #map_wrap {
-clear:both;
-float:left;
- }
+	clear:both;
+	float:left;
+	position:relative;
+}
 #tool {
-margin:2px;
-float:left;
-clear:both;
+	margin:2px;
+	float:left;
+	clear:both;
 }
 #loader {
-float:right;
-margin:0 20px
+	float:right;
+	margin:0 20px
 }
 #map {
- height:400px;
- width:500px;
- border: 1px solid #ab7;
- }
+	height:400px;
+	width:500px;
+	border: 1px solid #ab7;
+}
 
 #status {
-text-align:left;
- padding:2px;
-clear:both;
- border:1px solid #888;
-border-top:none;
- height:1em;
- background:#ddd;
- font-size:.85em;
- line-height:.85em;
- }
+	text-align:left;
+	padding:2px;
+	clear:both;
+	border:1px solid #888;
+	border-top:none;
+	height:1em;
+	background:#ddd;
+	font-size:.85em;
+	line-height:.85em;
+}
 hr {
-border:none;
-border-bottom:1px solid #ab7;
+	border:none;
+	border-bottom:1px solid #ab7;
+	margin:5px;
 }
 #log_wrap {
-display:none;
-float: left;
+	display:none;
+	float: left;
 }
 
 #dati {
-display:none;
-	position:relative;
-	top:-60px;
-	height:60px;
-	width:500px;
+	font-size:small;
+	position:absolute;
+	bottom:0;
+	padding:4px;
+	width:492px;
 	z-index:1000;
 	border:1px solid #ab7;
 	background-color: #efe;
@@ -93,12 +95,12 @@ display:none;
 }
 
 #log {
-overflow-y:scroll;
-max-height:280px;
-padding:1em;
- border:1px solid #ab7;
-background-color: #efe;
- font-size:small;
+	overflow-y:scroll;
+	max-height:280px;
+	padding:1em;
+	border:1px solid #ab7;
+	background-color: #efe;
+	font-size:small;
 }
 #copy {
 	position:fixed;

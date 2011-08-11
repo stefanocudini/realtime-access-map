@@ -23,7 +23,7 @@
 		<? endfor; ?>
 		</select> s &nbsp;</label>
 		<input id="zoomall" type="button" value="Zoom tutto" />
-		<div id="loader">&nbsp;</div>	
+		<div id="loader"><img src="loading.gif" /> updating...</div>	
 	</div>
 	<div id="map_wrap">
 		<div id="map"></div>	
