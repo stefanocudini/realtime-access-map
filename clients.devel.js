@@ -93,8 +93,8 @@ $(function() {
 	pointSelect.activate();
 
 	function getClients() {
-	    clients.protocol.params.d= $('#dom').val();
-		clients.refresh();
+	    clientsLayer.protocol.params.d= $('#dom').val();
+		clientsLayer.refresh();
 	}
 	
 	function loopClients() {	//eseguito al click e moveend su openlayers
