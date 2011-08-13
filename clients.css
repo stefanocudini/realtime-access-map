@@ -50,6 +50,7 @@ ul,li {
 	clear:both;
 }
 #loader {
+	display:none;
 	float:right;
 	margin:0 20px
 }
@@ -73,7 +74,7 @@ ul,li {
 hr {
 	border:none;
 	border-bottom:1px solid #ab7;
-	margin:5px;
+	margin:4px;
 }
 #log_wrap {
 	display:none;
@@ -81,17 +82,28 @@ hr {
 }
 
 #dati {
+	display:none;
 	font-size:small;
 	position:absolute;
 	bottom:0;
 	padding:4px;
 	width:492px;
+	max-height:50%;
+	overflow-y:scroll;	
 	z-index:1000;
 	border:1px solid #ab7;
 	background-color: #efe;
 	color:#000;
 	opacity: .70;
 	filter:Alpha(Opacity=70);		
+}
+#dati .x {
+	position:absolute;
+	top:2px;
+	right:2px;
+	font-size:16px;
+	font-weight:bold;
+	text-decoration:none;
 }
 
 #log {

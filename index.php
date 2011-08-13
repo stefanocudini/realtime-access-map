@@ -29,7 +29,7 @@
 		<div id="map"></div>	
 		<div id="coords"></div>
 		<!--div id="status"></div-->
-		<div id="dati"><div></div></div>
+		<div id="dati"><div></div><a href="#" class="x">&times;</a></div>
 	</div>
 	
 	<div id="log_wrap">	

@@ -5,8 +5,9 @@
 #$tables = $xml->xpath("/html/body/table/tr/td");
 #print_r($tables);
 
-include('../../simplehtmldom/simple_html_dom.php');
-$html = file_get_html("http://127.0.0.1/server-status");
+require_once('config.php');
+
+$html = file_get_html($urlstatus);
 #$html = file_get_html("http://127.0.0.1/server-status.html");
 $modes = array('_'=>'wait','S'=>'start','R'=>'read','W'=>'reply','K'=>'keepalive','D'=>'dns',
 			   'C'=>'close','L'=>'log','G'=>'grace','I'=>'clean','.'=>'open');
@@ -29,7 +30,8 @@ foreach($trs as $tr)
 	if($ip!='127.0.0.1' and $ip!='?' and $ip!=$_SERVER['REMOTE_ADDR'])
 		$ips[$vhost][]= array($ip,$req);
 }
-if( basename(__FILE__)==basename($_SERVER['PHP_SELF']) )
+
+if( basename(__FILE__)==basename($_SERVER['PHP_SELF']) )	//utilizzo standalone di clients.php
 {
 	foreach($ips as $dom=>$P)
 	{
