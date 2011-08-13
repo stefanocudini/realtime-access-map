@@ -125,7 +125,7 @@ $(function() {
 	});
 	
 	$('#zoomall').click(function(e) {
-		mapOL.zoomToExtent( clientLayer.getDataExtent() );
+		mapOL.zoomToExtent( clientsLayer.getDataExtent() );
 	});
 	
 	$('#dati .x').click(function(e) {
