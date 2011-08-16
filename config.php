@@ -15,6 +15,8 @@ Configurazione del modulo mod_status di apache2
 
 */
 
+$domains = array('easyblog.it','stefanorossini.it','ryuzan.it');
+
 $KEY = 'ac735b1e635d4ec5b0ba271b287eb42c2161eabfbbc53894cb6ea642c210befd';
 //chiave api.ipinfodb.com 
 $urlstatus = "http://127.0.0.1/server-status";

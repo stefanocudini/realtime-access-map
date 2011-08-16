@@ -1,4 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?
+
+require_once('config.php');
+
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
     <title>Traccia Posizione Client HTTP</title>
@@ -12,15 +16,15 @@
 
 	<div id="tool">
 		<select id="dom">
-			<option value="ryuzan.it">ryuzan.it</option>
-			<option value="easyblog.it" selected="selected">easyblog.it</option>
-			<option value="stefanorossini.it">stefanorossini.it</option>
+		<?php foreach($domains as $dom): ?>
+			<option value="<?=$dom?>"><?=$dom?></option>
+		<?php endforeach; ?>
 		</select>
 		<label><input id="loop" type="checkbox" />Refresh</label>
 		<label><select id="tt">
-		<? for($t=0;$t<=20;$t++): ?>
+		<?php for($t=0;$t<=20;$t++): ?>
 		<option value="<?=$t*1000?>"><?=$t?></option>
-		<? endfor; ?>
+		<?php endfor; ?>
 		</select> s &nbsp;</label>
 		<input id="zoomall" type="button" value="Zoom tutto" />
 		<div id="loader"><img src="loading.gif" /> updating...</div>	
