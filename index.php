@@ -15,14 +15,26 @@ require_once('config.php');
 	  	<h1>Tracciamento posizione geografica dei client HTTP collegati</h1> 
 
 	<div id="tool">
+	<?
+	$DOM = (isset($_SERVER['QUERY_STRING']) and !empty($_SERVER['QUERY_STRING'])) ? trim($_SERVER['QUERY_STRING']) : false;
+	if($DOM and in_array($DOM,$domains) ):
+	?>
+		<input id="dom" type="text" value="<?=$DOM?>" disabled="disabled" />
+	<?
+	else:
+	?>
 		<select id="dom">
 		<?php foreach($domains as $dom): ?>
 			<option value="<?=$dom?>"><?=$dom?></option>
 		<?php endforeach; ?>
 		</select>
-		<label><input id="loop" type="checkbox" />Refresh</label>
+	<?
+	endif;
+	?>
+		&nbsp;
+		<label><input id="loop" type="checkbox" />Aggiorna ogni</label>
 		<label><select id="tt">
-		<?php for($t=0;$t<=20;$t++): ?>
+		<?php for($t=15;$t<=60;$t+=5): ?>
 		<option value="<?=$t*1000?>"><?=$t?></option>
 		<?php endfor; ?>
 		</select> s &nbsp;</label>

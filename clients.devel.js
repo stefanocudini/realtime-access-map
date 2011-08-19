@@ -61,8 +61,8 @@ $(function() {
 		styleMap: new OpenLayers.StyleMap({
 		    "default": style,
 		    "select": {
-		        fillColor: randcolor(),
-		        strokeColor: "#32a8a9"
+		        fillColor: "#ff0000",
+		        strokeColor: "#aa0000"
 		    }
 		})
 	});
@@ -75,15 +75,12 @@ $(function() {
 		for(c in feature.cluster)
 		{		
 			var cont, attrs = feature.cluster[c].attributes;
-			cont = '';
-			for(d in attrs)
-			{
-				if(d!='col')
-					cont += d +': ' + (attrs[d].constructor==Array ? attrs[d].join("<br />") : attrs[d]) +"<br />";
-			}
+			cont =  '<b>Ip:</b>'+ attrs.ip +', <b>City:</b> '+ attrs.city +'<br>'+
+					'<b>Pagine:</b><br>'+ attrs.url.join('<br>');
+			
 			content.push(cont);
 		}	
-		$('#dati').show().children('div').html(content.join("<hr />"));
+		$('#dati').show().children('div').html(content.join('<hr>'));
 	}
 	/*function onPointUnSelect(feature) {  //evento onselect feature, del layer di selezione
 		setTimeout(function(){ $('#dati').fadeOut(); },3000);
