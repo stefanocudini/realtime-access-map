@@ -4,7 +4,7 @@ header("Content-type: text/plain");
 require('clients.php');
 //inizializza $ips
 
-$dominio = isset($_GET['d']) ? trim($_GET['d']) : 'easyblog.it';
+$dominio = isset($_GET['d']) ? trim($_GET['d']) : $defaultdom;
 
 #$url = "http://api.ipinfodb.com/v2/ip_query.php?key=$KEY&output=json&timezone=&ip=";
 //se si fanno troppe richieste errate con questo url api.ipinfodb.com il dns diventa irragiungibile, ma l'ip e' sempre valido!
@@ -24,19 +24,13 @@ foreach($ips[$dominio] as $p)
 	$J = json_decode( get($urlinfo.$ip,$hostinfo), true);
 	$city = $J['City'];
 	$lonlat = array( (float)$J['Longitude'], (float)$J['Latitude'] );
-	#$mode = $p[3];
-/*	$F['type']= "Feature";
-	$F['geometry']= array('type'=>'Point', 'coordinates'=>array((float)$J['Longitude'], (float)$J['Latitude']));
-	$F['properties']= array('ip'=>$ip, 'city'=>$J['City'], 'url'=>$url);
-	$hosts['features'][]= $F;
-	//ogni url una feature!!
-}//*/
+	$mode = $p[2];
 	$IPS[$ip]['type']= 'Feature';
 	$IPS[$ip]['geometry']= array('type'=>'Point',
-						  'coordinates'=>$lonlat);
+						  		 'coordinates'=>$lonlat);
 	$IPS[$ip]['properties']['ip']= $ip;
 	$IPS[$ip]['properties']['city']= $city;
-	$IPS[$ip]['properties']['url'][]= $url;
+	$IPS[$ip]['properties']['url'][]= $url.' ('.$modes_short[$mode].')';
 #	$IPS[$ip]=$F;
 }
 foreach($IPS as $IP)
