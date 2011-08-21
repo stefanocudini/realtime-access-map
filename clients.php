@@ -27,15 +27,14 @@ foreach($trs as $tr)
 
 if( basename(__FILE__) == basename($_SERVER['PHP_SELF']) )	//utilizzo standalone di clients.php
 {
-header("Content-type: text/plain");
-print_r($ips);
-/*	foreach($ips as $dom=>$P)
+	foreach($ips as $dom=>$P)
 	{
 		echo $dom."<br>";
 		foreach($P as $p)
 			echo implode(' ',$p).'<br />';
 		echo "<hr>";
 	}//*/
+echo $html;
 }
 
 ?>

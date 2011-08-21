@@ -6,6 +6,7 @@ $(function() {
 		TT = 10000,
 		loop = false,
 		firstloop = true;
+		
 	var map$ = $('#map'), 
 		mapOL;
 	var wgs84 = new OpenLayers.Projection("EPSG:4326"),
@@ -55,7 +56,6 @@ $(function() {
 		protocol: new OpenLayers.Protocol.HTTP({
 		    url: "coords2geojson.php",
 		    params: {d: $('#dom').val()},
-//		    callUserCallback: function(resp,){ $('#log')},
 		    format: new OpenLayers.Format.GeoJSON({internalProjection: mercator, externalProjection: wgs84})
 		}),
 		styleMap: new OpenLayers.StyleMap({
@@ -66,6 +66,15 @@ $(function() {
 		    }
 		})
 	});
+	clientsLayer.events.on({
+		refresh: function() {
+			$('#loader').show();
+		},
+		featuresadded: function() {
+			$('#loader').hide();
+		}
+	});//*/
+	
 	mapOL.addLayers([clientsLayer]);
 
 	function onPointSelect(feature)  //evento onselect feature, del layer di selezione
@@ -90,6 +99,9 @@ $(function() {
 	pointSelect.activate();
 
 	function getClients() {
+		$('#dati').hide();
+		clientsLayer.removeAllFeatures();
+	    clientsLayer.protocol.abort();
 	    clientsLayer.protocol.params.d= $('#dom').val();
 		clientsLayer.refresh();
 	}
@@ -101,11 +113,6 @@ $(function() {
 
 		setTimeout(function(){ loopClients(); }, TT);  //loop ricorsivo a intervallo variabile
 	}
-
-/*	$.ajaxSetup({async:false});
-	$('#loader')
-	.ajaxStart(function() {	$(this).show();	})
-	.ajaxStop(function() { $(this).hide(); });*/
 	
 	$('#dom').change(function() {
 		getClients();
