@@ -21,7 +21,15 @@ foreach($ips[$dominio] as $p)
 	$r = explode(' ', $p[1]);
 	$u = parse_url($r[1]);
 	$url = stripslashes($u['path']);
-	$J = json_decode( get($urlinfo.$ip,$hostinfo), true);
+	
+	if(file_exists($dircache.$ip))
+		$jt = file_get_contents($dircache.$ip);
+	else{
+		$jt = get($urlinfo.$ip,$hostinfo);
+		file_put_contents($dircache.$ip, $jt);
+		chmod($dircache.$ip,0775);
+	}
+	$J = json_decode( $jt, true);
 	$city = $J['City'];
 	$lonlat = array( (float)$J['Longitude'], (float)$J['Latitude'] );
 	$mode = $p[2];

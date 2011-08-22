@@ -23,6 +23,8 @@ $KEY = 'ac735b1e635d4ec5b0ba271b287eb42c2161eabfbbc53894cb6ea642c210befd';
 $urlstatus = "http://127.0.0.1/server-status";
 //indirizzo di mod_status di apache
 
+$dircache = './cache/';	//directory di cache per le richieste a ipinfodb.com
+
 $modes = array('_'=>'Waiting for Connection', 'S'=>'Starting up', 'R'=>'Reading Request',
 				'W'=>'Sending Reply', 'K'=>'Keepalive (read)', 'D'=>'DNS Lookup',
 				'C'=>'Closing connection', 'L'=>'Logging', 'G'=>'Gracefully finishing',
