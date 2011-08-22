@@ -17,22 +17,20 @@ Configurazione del modulo mod_status di apache2
 
 $domains = array('easyblog.it', 'stefanorossini.it', 'ryuzan.it');
 $defaultdom = $domains[1];
-
 $KEY = 'ac735b1e635d4ec5b0ba271b287eb42c2161eabfbbc53894cb6ea642c210befd';
 //chiave api.ipinfodb.com 
+$myip = '91.121.205.105';	//ip del server locale
+$dircache = './cache/';	//directory di cache per le richieste a ipinfodb.com
 $urlstatus = "http://127.0.0.1/server-status";
 //indirizzo di mod_status di apache
-
-$dircache = './cache/';	//directory di cache per le richieste a ipinfodb.com
 
 $modes = array('_'=>'Waiting for Connection', 'S'=>'Starting up', 'R'=>'Reading Request',
 				'W'=>'Sending Reply', 'K'=>'Keepalive (read)', 'D'=>'DNS Lookup',
 				'C'=>'Closing connection', 'L'=>'Logging', 'G'=>'Gracefully finishing',
 				'I'=>'Idle cleanup of worker', '.'=>'Open slot with no current process');
-
 $modes_short = array('_'=>'wait','S'=>'start','R'=>'read','W'=>'reply','K'=>'keepalive','D'=>'dns',
 			   'C'=>'close','L'=>'log','G'=>'grace','I'=>'clean','.'=>'open');
-			   
+
 require_once('../../simplehtmldom/simple_html_dom.php');
 
 function get($url,$host,$post=null)
