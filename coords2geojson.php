@@ -3,7 +3,6 @@ header("Content-type: text/plain");
 
 require('clients.php');
 //inizializza $ips
-
 $dominio = isset($_GET['d']) ? trim($_GET['d']) : $defaultdom;
 
 #$url = "http://api.ipinfodb.com/v2/ip_query.php?key=$KEY&output=json&timezone=&ip=";
@@ -15,6 +14,8 @@ $urlinfo = "http://67.212.77.12/v2/ip_query.php?key=$KEY&output=json&timezone=&i
 #echo "point	title	description	iconSize	iconOffset	icon\r\n";
 $hosts = array();
 $hosts['type']= "FeatureCollection";
+$IPS=array();
+if($ips[$dominio])
 foreach($ips[$dominio] as $p)
 {
 	$ip = $p[0];
@@ -41,6 +42,7 @@ foreach($ips[$dominio] as $p)
 	$IPS[$ip]['properties']['url'][]= $url.' ('.$modes_short[$mode].')';
 #	$IPS[$ip]=$F;
 }
+
 foreach($IPS as $IP)
 	$hosts['features'][]= $IP;//*/
 	
