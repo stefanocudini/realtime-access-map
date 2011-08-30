@@ -31,7 +31,7 @@ $modes = array('_'=>'Waiting for Connection', 'S'=>'Starting up', 'R'=>'Reading 
 $modes_short = array('_'=>'wait','S'=>'start','R'=>'read','W'=>'reply','K'=>'keepalive','D'=>'dns',
 			   'C'=>'close','L'=>'log','G'=>'grace','I'=>'clean','.'=>'open');
 
-require_once('../../simplehtmldom/simple_html_dom.php');
+require_once('simple_html_dom.php');
 
 function get($url,$host,$post=null)
 {
