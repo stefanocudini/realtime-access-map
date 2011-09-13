@@ -6,15 +6,15 @@ html, body {
 }
 
 body {
-	margin: 4px;
-	background: #dea;
-	color: #562;
+	margin:1em;
+	background: #9FB8B8;
+	color:#00008B;
 }
 
 h1 {
 	margin: 0;
 	padding: 0px;
-	font-size: 16px;
+	font-size: 1em;
 }
 
 fieldset {
@@ -26,10 +26,17 @@ legend,label {
 	font-size:small;
 }
 
-input,select {
-	background: #cda;
-	border: 1px solid #ab7;
+input,select,#map {
+	background: #C1D6D6;
+	color: #3D7878;
+	color: #00008B;
+	border: 2px solid #6C7D7D;
+	border: 2px solid #00008B;
+  -moz-border-radius: .25em;
+  -webkit-border-radius: .25em;
+  border-radius: .25em;
 }
+
 
 h1,h2,h4 {
 	margin:0;
@@ -44,8 +51,14 @@ ul,li {
 	float:left;
 	position:relative;
 }
+#map {
+	height:400px;
+	width:500px;
+	background: #B5D0D0;
+}
+
 #tool {
-	margin:2px;
+	margin:2px 0;
 	width:500px;
 	clear:both;
 	position:relative;	
@@ -56,11 +69,6 @@ ul,li {
 	position:absolute;
 	top:0;
 	right:0;
-}
-#map {
-	height:400px;
-	width:500px;
-	border: 1px solid #ab7;
 }
 
 #status {
@@ -121,7 +129,6 @@ hr {
 	position:fixed;
 	top:4px;
 	right:8px;
-	color:#888;
 	z-index:4000;
 	font-size:small;	
 }
