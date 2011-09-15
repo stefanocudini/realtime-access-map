@@ -48,9 +48,9 @@ require_once('config.php');
 		<div id="dati"><div></div><a href="#" class="x">&times;</a></div>
 	</div>
 	
-	<div id="log_wrap">	
+	<div id="log_wrap">
 	<h4> Lista:</h4>
-	<div id="log"></div>  
+	<div id="log"></div>
 	</div>
 	
 	<div id="copy">powered by Stefano Cudini</div>

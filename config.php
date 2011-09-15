@@ -12,17 +12,23 @@ Configurazione del modulo mod_status di apache2
 		Allow from 127.0.0.1
 	</Location>
 	</IfModule>
-
 */
 
 $domains = array('easyblog.it', 'stefanorossini.it', 'ryuzan.it');
-$defaultdom = $domains[1];
+//domini dei virtual hosts
+$defaultdom = $domains[0];
+//dominio visualizzato di default
 $KEY = 'ac735b1e635d4ec5b0ba271b287eb42c2161eabfbbc53894cb6ea642c210befd';
-//chiave api.ipinfodb.com 
-$myip = '91.121.205.105';	//ip del server locale
-$dircache = './cache/';	//directory di cache per le richieste a ipinfodb.com
+//chiave api.ipinfodb.com
+$myip = $_SERVER['SERVER_ADDR'];
+//ip del server locale per escluderlo dagli accessi
+$dircache = './cache/';
+//directory di cache per le richieste a ipinfodb.com
 $urlstatus = "http://127.0.0.1/server-status";
 //indirizzo di mod_status di apache
+
+
+
 
 $modes = array('_'=>'Waiting for Connection', 'S'=>'Starting up', 'R'=>'Reading Request',
 				'W'=>'Sending Reply', 'K'=>'Keepalive (read)', 'D'=>'DNS Lookup',
@@ -43,31 +49,24 @@ function get($url,$host,$post=null)
     curl_setopt($ch, CURLOPT_MAX_SEND_SPEED_LARGE, 9578);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: $host"));
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)');#$_SERVER['HTTP_USER_AGENT']);
-    /*curl_setopt($ch, CURLOPT_REFERER, 'http://www.mymovies.it/');
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-Requested-With: XMLHttpRequest') );
-    if(isset($post)) {
-    $post = is_array($post) ? http_build_query($post) : $post;
-    curl_setopt($ch, CURLOPT_POST      ,1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-    }//*/
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $data = curl_exec($ch);
     $info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
     $error = curl_error($ch);
-    curl_close($ch); 
+    curl_close($ch);
 
     return $data;
 }
 
 function json_indent($json) {
- 
+
     $result    = '';
     $pos       = 0;
     $strLen    = strlen($json);
     $indentStr = '  ';
     $newLine   = "\n";
- 
+
     for($i = 0; $i <= $strLen; $i++) {
         
         // Grab the next character in the string
