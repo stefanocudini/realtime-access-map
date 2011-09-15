@@ -1,7 +1,6 @@
 $(function() {
 
-	var lon = 12.451196, lat = 42.374583,  //casa
-		lon = 234827.002046, lat =4461518.840733,	//centro mondo
+	var lon = 234827.002046, lat =4461518.840733,	//centro del mondo
 		zoom = 1,
 		TT = 10000,
 		loop = false,

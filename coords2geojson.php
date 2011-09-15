@@ -43,10 +43,11 @@ foreach($ips[$dominio] as $p)
 #	$IPS[$ip]=$F;
 }
 
+$hosts['features']=array();
 foreach($IPS as $IP)
 	$hosts['features'][]= $IP;//*/
 	
-echo json_indent( stripslashes(json_encode($hosts)) );
-#echo stripslashes(json_encode($hosts));#, JSON_FORCE_OBJECT);
+#echo json_indent( stripslashes(json_encode($hosts)) );
+echo stripslashes(json_encode($hosts));#, JSON_FORCE_OBJECT);
 
 ?>

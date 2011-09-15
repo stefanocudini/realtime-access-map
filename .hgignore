@@ -2,6 +2,6 @@ syntax: glob
 .*
 *~
 *.orig
-ips.txt
 cache
 cron-cache
+simple_html_dom.php
