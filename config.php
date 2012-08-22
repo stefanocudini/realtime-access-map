@@ -14,7 +14,8 @@ Configurazione del modulo mod_status di apache2
 	</IfModule>
 */
 
-$domains = array('easyblog.it', 'stefanorossini.it', 'ryuzan.it');
+#$domains = array('easyblog.it', 'stefanorossini.it', 'ryuzan.it');
+$domains = array('easyblog.it');
 //domini dei virtual hosts
 
 $defaultdom = $domains[0];

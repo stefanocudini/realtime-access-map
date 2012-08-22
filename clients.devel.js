@@ -65,6 +65,7 @@ $(function() {
 		    }
 		})
 	});
+	
 	clientsLayer.events.on({
 		refresh: function() {
 			$('#loader').show();
