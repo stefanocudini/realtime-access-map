@@ -14,8 +14,7 @@ Configurazione del modulo mod_status di apache2
 	</IfModule>
 */
 
-#$domains = array('easyblog.it', 'stefanorossini.it', 'ryuzan.it');
-$domains = array('easyblog.it');
+$domains = array('easyblog.it','danieleverrocchio.com','nuvolemoda.com', 'stefanorossini.it', 'ryuzan.it');
 //domini dei virtual hosts
 
 $defaultdom = $domains[0];
@@ -33,9 +32,9 @@ $dircache = './cache/';
 $urlstatus = "http://127.0.0.1/server-status";
 //indirizzo di mod_status di apache
 
+require_once('easyblog/iputils.php');
 require_once('simple_html_dom.php');
 //parser html
-
 
 $modes = array('_'=>'Waiting for Connection', 'S'=>'Starting up', 'R'=>'Reading Request',
 				'W'=>'Sending Reply', 'K'=>'Keepalive (read)', 'D'=>'DNS Lookup',

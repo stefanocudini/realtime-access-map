@@ -21,14 +21,16 @@ require_once('config.php');
 	?>
 		<input id="dom" type="text" value="<?=$DOM?>" disabled="disabled" />
 	<?
-	else:
+	elseif(!iszakbook()):
 	?>
 		<select id="dom">
-		<?php foreach($domains as $dom): ?>
+ 		<?php foreach($domains as $dom): ?>
 			<option value="<?=$dom?>"><?=$dom?></option>
 		<?php endforeach; ?>
 		</select>
 	<?
+	else:
+		?><?
 	endif;
 	?>
 		&nbsp;
