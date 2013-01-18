@@ -1,2 +1,0 @@
-#!/bin/bash
-grep $1 /var/log/apache2/easyblog.it_access.log | cut -d'"' -f1,2

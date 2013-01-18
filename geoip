@@ -1,2 +1,0 @@
-#!/bin/bash
-/usr/local/bin/iplocator $1 json true | grep "Lat\|Lon" | cut -d'"' -f4 | xargs echo

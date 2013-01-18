@@ -14,27 +14,23 @@ Configurazione del modulo mod_status di apache2
 	</IfModule>
 */
 
-$domains = array('easyblog.it','danieleverrocchio.com','nuvolemoda.com', 'stefanorossini.it', 'ryuzan.it');
+require_once('geoip.lib.php');
+//definisce la funzione geoip()
+
+require_once('simple_html_dom.php');
+//parser html
+
+$domains = file('domains.conf', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 //domini dei virtual hosts
 
 $defaultdom = $domains[0];
 //dominio visualizzato di default
 
-$KEY = 'ac735b1e635d4ec5b0ba271b287eb42c2161eabfbbc53894cb6ea642c210befd';
-//chiave api.ipinfodb.com
-
 $myip = $_SERVER['SERVER_ADDR'];
 //ip del server locale per escluderlo dagli accessi
 
-$dircache = './cache/';
-//directory di cache per le richieste a ipinfodb.com
-
 $urlstatus = "http://127.0.0.1/server-status";
 //indirizzo di mod_status di apache
-
-require_once('easyblog/iputils.php');
-require_once('simple_html_dom.php');
-//parser html
 
 $modes = array('_'=>'Waiting for Connection', 'S'=>'Starting up', 'R'=>'Reading Request',
 				'W'=>'Sending Reply', 'K'=>'Keepalive (read)', 'D'=>'DNS Lookup',
@@ -42,26 +38,6 @@ $modes = array('_'=>'Waiting for Connection', 'S'=>'Starting up', 'R'=>'Reading 
 				'I'=>'Idle cleanup of worker', '.'=>'Open slot with no current process');
 $modes_short = array('_'=>'wait','S'=>'start','R'=>'read','W'=>'reply','K'=>'keepalive','D'=>'dns',
 			   'C'=>'close','L'=>'log','G'=>'grace','I'=>'clean','.'=>'open');
-
-function get($url,$host,$post=null)
-{
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-#    curl_setopt($ch, CURLOPT_TIMEOUT, 5000);
-#    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 5000);
-    curl_setopt($ch, CURLOPT_MAX_RECV_SPEED_LARGE, 9578);
-    curl_setopt($ch, CURLOPT_MAX_SEND_SPEED_LARGE, 9578);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: $host"));
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)');#$_SERVER['HTTP_USER_AGENT']);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $data = curl_exec($ch);
-    $info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    $error = curl_error($ch);
-    curl_close($ch);
-
-    return $data;
-}
 
 function json_indent($json) {
 
