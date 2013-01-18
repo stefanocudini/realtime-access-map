@@ -4,5 +4,5 @@ syntax: glob
 *.orig
 domains.conf
 api.ipinfodb.com.key
-geoipcache/*
+geoipcache
 cron-geoipcache
