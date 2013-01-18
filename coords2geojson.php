@@ -8,6 +8,8 @@ $dominio = isset($_GET['d']) ? trim($_GET['d']) : $defaultdom;
 #echo "point	title	description	iconSize	iconOffset	icon\r\n";
 $hosts = array();
 $hosts['type']= "FeatureCollection";
+
+//$ips definito in clients.php
 $IPS = array();
 if($ips[$dominio]):
 	foreach($ips[$dominio] as $p)

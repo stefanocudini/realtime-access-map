@@ -20,7 +20,7 @@ foreach($trs as $tr)
 	$ip = $tr->find('td',-3)->innertext;
 	$req = $tr->find('td',-1)->innertext;
 	$vhost = $tr->find('td',-2)->innertext;
-	$mode = trim($tr->find('td',3)->innertext);
+	$mode = trim($tr->find('td',3)->plaintext);
 	if($ip!='127.0.0.1' and $ip!=$myip and $ip!='?' and $ip!=$_SERVER['REMOTE_ADDR'])
 		$ips[$vhost][]= array($ip, $req, $mode);
 }

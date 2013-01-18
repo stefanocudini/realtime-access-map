@@ -33,11 +33,12 @@ $urlstatus = "http://127.0.0.1/server-status";
 //indirizzo di mod_status di apache
 
 $modes = array('_'=>'Waiting for Connection', 'S'=>'Starting up', 'R'=>'Reading Request',
-				'W'=>'Sending Reply', 'K'=>'Keepalive (read)', 'D'=>'DNS Lookup',
-				'C'=>'Closing connection', 'L'=>'Logging', 'G'=>'Gracefully finishing',
-				'I'=>'Idle cleanup of worker', '.'=>'Open slot with no current process');
+			   'W'=>'Sending Reply', 'K'=>'Keepalive (read)', 'D'=>'DNS Lookup',
+			   'C'=>'Closing connection', 'L'=>'Logging', 'G'=>'Gracefully finishing',
+			   'I'=>'Idle cleanup of worker', '.'=>'Open slot with no current process');
+				
 $modes_short = array('_'=>'wait','S'=>'start','R'=>'read','W'=>'reply','K'=>'keepalive','D'=>'dns',
-			   'C'=>'close','L'=>'log','G'=>'grace','I'=>'clean','.'=>'open');
+			         'C'=>'close','L'=>'log','G'=>'grace','I'=>'clean','.'=>'open');
 
 function json_indent($json) {
 
