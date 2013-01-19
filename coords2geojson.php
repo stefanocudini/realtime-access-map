@@ -15,9 +15,9 @@ if($ips[$dominio]):
 	foreach($ips[$dominio] as $p)
 	{
 		$ip = $p[0];
-		$r = explode(' ', $p[1]);
-		$u = parse_url($r[1]);
-		$url = stripslashes($u['path']);
+		$req = explode(' ',$p[1]);
+		$u = isset($req[1]) ? parse_url($req[1]) : array();
+		$url = isset($u['path']) ? $u['path'] : '';
 
 		$J = geoip($ip, true);
 		$city = $J['City'];
