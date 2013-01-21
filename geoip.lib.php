@@ -2,26 +2,34 @@
 
 function geoip($ip, $array=false)
 {
-	$dircache = './geoipcache/';
+	$dircache = 'geoipcache/';
 	//directory di cache per le richieste a ipinfodb.com
-
-	$KEY = trim(file_get_contents('api.ipinfodb.com.key'));
+//	$KEY = trim(file_get_contents('api.ipinfodb.com.key'));
+	$KEY = 'ac735b1e635d4ec5b0ba271b287eb42c2161eabfbbc53894cb6ea642c210befd';
 	//file con dentro la chiave api.ipinfodb.com
+	
+	$info = '';
 
-	if(empty($ip)) return '';
+	if( !preg_match('/^((1?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(1?\d{1,2}|2[0-4]\d|25[0-5])$/', $ip) )
+		$info = 'IP Not Valid';
+	else
+	{
+		$hostinfo = 'api.ipinfodb.com';
+		$urlinfo = 'http://67.212.77.12/v2/ip_query.php?key='.$KEY.'&output=json&timezone=&ip='.$ip;
 
-	$hostinfo = 'api.ipinfodb.com';
-	$urlinfo = 'http://67.212.77.12/v2/ip_query.php?key='.$KEY.'&output=json&timezone=&ip='.trim($ip);
-
-	if(file_exists($dircache.$ip))
-		$info = file_get_contents($dircache.$ip);
-	else{
-		$info = geoip_get($urlinfo, $hostinfo);
-		file_put_contents($dircache.$ip, $info);
-		chmod($dircache.$ip, 0775);
+		if(file_exists($dircache.$ip))
+			$info = file_get_contents($dircache.$ip);
+		else
+		{
+			$info = geoip_get($urlinfo, $hostinfo);
+			$info = json_decode($info) === null ? '' : $info;
+			
+			if(!empty($info))
+				file_put_contents($dircache.$ip, $info) and chmod($dircache.$ip, 0775);
+		}
 	}
-
-	return $array ? json_decode(trim($info),true) : $info;
+	
+	return $array ? json_decode($info, true) : $info;
 }
 
 function geoip_get($url, $host, $post=null)
@@ -37,7 +45,7 @@ function geoip_get($url, $host, $post=null)
 
     $error = curl_error($ch);
     curl_close($ch);
-    return $data;
+    return trim($data);
 }
 
 ?>
