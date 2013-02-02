@@ -11,7 +11,7 @@ $hosts['type']= "FeatureCollection";
 
 //$ips definito in clients.php
 $IPS = array();
-if($ips[$dominio]):
+if(isset($ips[$dominio])):
 	foreach($ips[$dominio] as $p)
 	{
 		$ip = $p[0];
