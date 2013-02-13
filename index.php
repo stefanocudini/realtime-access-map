@@ -56,7 +56,7 @@ require_once('config.php');
 	<div id="copy">powered by Stefano Cudini</div>
 
 	<script src="../openlayers/OpenLayers.js"></script>
-	<script src="/jquery-1.4.2.min.js"></script>
+	<script src="/js/jquery-1.4.2.min.js"></script>
 	<script src="clients.devel.js" ></script>  	  
   </body>
 </html>
