@@ -15,7 +15,7 @@ Configurazione del modulo mod_status di apache2
 */
 
 require_once('easyblog/geoip.lib.php');
-//definisce la funzione geoip()
+//define function geoip()
 
 require_once('simple_html_dom.php');
 //parser html
