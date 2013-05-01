@@ -58,7 +58,7 @@ require_once('config.php');
 	<script src="../openlayers/OpenLayers.js"></script>
 	<script src="/js/jquery-1.4.2.min.js"></script>
 	<script src="clients.devel.js" ></script>  	  
-<script type="text/javascript" src="/labs.analytics.js"></script>
+<script type="text/javascript" src="/labs-common.js"></script>
   </body>
 </html>
 
