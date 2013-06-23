@@ -4,8 +4,8 @@ function geoip($ip, $array=false)
 {
 	$dircache = 'geoipcache/';
 	//directory di cache per le richieste a ipinfodb.com
-//	$KEY = trim(file_get_contents('api.ipinfodb.com.key'));
-	$KEY = 'ac735b1e635d4ec5b0ba271b287eb42c2161eabfbbc53894cb6ea642c210befd';
+	$KEY = trim(file_get_contents('api.ipinfodb.com.key'));
+	
 	//file con dentro la chiave api.ipinfodb.com
 	
 	$info = '';
