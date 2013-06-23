@@ -52,13 +52,17 @@ require_once('config.php');
 	<h4> Lista:</h4>
 	<div id="log"></div>
 	</div>
+
+	<a href="https://github.com/stefanocudini/realtime-access-map"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 	
 	<div id="copy">powered by Stefano Cudini</div>
 
 	<script src="../openlayers/OpenLayers.js"></script>
 	<script src="/js/jquery-1.4.2.min.js"></script>
 	<script src="clients.devel.js" ></script>  	  
-<script type="text/javascript" src="/labs-common.js"></script>
+	
+	<script src="/labs-common.js"></script>
+  
   </body>
 </html>
 
