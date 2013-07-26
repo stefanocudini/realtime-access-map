@@ -53,6 +53,7 @@ require_once('config.php');
 	<div id="log"></div>
 	</div>
 
+
 	<a href="https://github.com/stefanocudini/realtime-access-map"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 	
 	<div id="copy">powered by Stefano Cudini</div>
