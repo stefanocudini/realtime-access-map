@@ -127,10 +127,16 @@ hr {
 }
 #copy {
 	position:fixed;
-	top:4px;
-	right:8px;
-	z-index:4000;
-	font-size:small;	
+	z-index:1000;
+	right:140px;
+	top:-6px;
+	font-style:italic;
+	font-size:.85em;
+	padding:5px 8px;
+	background: #fff;
+	border:2px solid #c5cdd4;
+	border-radius:.7em;
+	opacity: 0.8;	
 }
  .olPopup {
 	 border-radius: 0.25em;

@@ -56,7 +56,7 @@ require_once('config.php');
 
 	<a href="https://github.com/stefanocudini/realtime-access-map"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 	
-	<div id="copy">powered by Stefano Cudini</div>
+	<div id="copy"><a href="http://labs.easyblog.it/">Labs</a> &bull; <a href="http://labs.easyblog.it/stefano-cudini/">Stefano Cudini</a></div>	
 
 	<script src="../openlayers/OpenLayers.js"></script>
 	<script src="/js/jquery-1.4.2.min.js"></script>
