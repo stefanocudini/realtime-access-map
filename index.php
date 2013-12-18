@@ -12,8 +12,13 @@ require_once('config.php');
     </style>
   </head>
   <body>
-	  	<h1>Tracciamento posizione geografica degli accessi</h1> 
-
+	  <h1>RealTime Access Map</h1> 
+	<div id="desc">
+		Map for realtime monitoring geo-referenced accesses.
+			<iframe src="http://ghbtns.com/github-btn.html?user=stefanocudini&amp;repo=realtime-access-map&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="104px" height="20px"></iframe>
+		<br />
+		Other useful stuff for <a href="http://labs.easyblog.it/maps/">Web Mapping...</a>
+	</div>
 	<div id="tool">
 	<?
 	$DOM = (isset($_SERVER['QUERY_STRING']) and !empty($_SERVER['QUERY_STRING'])) ? trim($_SERVER['QUERY_STRING']) : false;
