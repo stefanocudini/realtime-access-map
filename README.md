@@ -16,3 +16,6 @@
 
 2) insert in file: api.ipinfodb.com.key
    your api.ipinfodb.com API KEY
+
+*TODOS
+	using: http://dev.maxmind.com/geoip/legacy/geolite/
