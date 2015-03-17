@@ -63,7 +63,7 @@ require_once('config.php');
 	
 	<div id="copy"><a href="http://labs.easyblog.it/">Labs</a> &bull; <a rel="author" href="http://labs.easyblog.it/stefano-cudini/">Stefano Cudini</a></div>	
 
-	<script src="../openlayers/OpenLayers.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/OpenLayers.js"></script>
 	<script src="/js/jquery-1.4.2.min.js"></script>
 	<script src="clients.devel.js" ></script>  	  
 	
