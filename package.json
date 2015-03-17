@@ -1,0 +1,26 @@
+{
+  "name": "realtime-access-map",
+  "version": "0.0.0",
+  "description": "Map for realtime monitoring geo-referenced accesses ",
+  "main": "clients.devel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stefanocudini/realtime-access-map.git"
+  },
+  "keywords": [
+    "tracking",
+    "gps",
+    "http",
+    "websocket",
+    "openlayers"
+  ],
+  "author": "Stefano Cudini",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanocudini/realtime-access-map/issues"
+  },
+  "homepage": "https://github.com/stefanocudini/realtime-access-map"
+}
