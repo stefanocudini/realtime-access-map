@@ -7,11 +7,12 @@
 
 require_once('config.php');
 
-$html = file_get_html($urlstatus);
-#$html = file_get_html("http://127.0.0.1/server-status.html");
+$html = @file_get_html($urlstatus);
+#$html = @file_get_html("http://127.0.0.1/server-status.html");
 
+if($html)
+	$tab = $html->find('table',0);
 
-$tab = $html->find('table',0);
 if($tab)
 {
 	$trs = $tab->find('tr');
