@@ -12,29 +12,31 @@ $html = file_get_html($urlstatus);
 
 
 $tab = $html->find('table',0);
-$trs = $tab->find('tr');
-$ips = array();
-foreach($trs as $tr)
+if($tab)
 {
-	if(!$tr->find('td')) continue;//se non ci sono td nel tr
-	$ip = $tr->find('td',-3)->innertext;
-	$req = $tr->find('td',-1)->innertext;
-	$vhost = $tr->find('td',-2)->innertext;
-	$mode = trim($tr->find('td',3)->plaintext);
-	if($ip!='127.0.0.1' and $ip!=$myip and $ip!='?' and $ip!=$_SERVER['REMOTE_ADDR'])
-		$ips[$vhost][]= array($ip, $req, $mode);
-}
-
-if( basename(__FILE__) == basename($_SERVER['PHP_SELF']) )	//utilizzo standalone di clients.php
-{
-	foreach($ips as $dom=>$P)
+	$trs = $tab->find('tr');
+	$ips = array();
+	foreach($trs as $tr)
 	{
-		echo $dom."<br>";
-		foreach($P as $p)
-			echo implode(' ',$p).'<br />';
-		echo "<hr>";
-	}//*/
-echo $html;
-}
+		if(!$tr->find('td')) continue;//se non ci sono td nel tr
+		$ip = $tr->find('td',-3)->innertext;
+		$req = $tr->find('td',-1)->innertext;
+		$vhost = $tr->find('td',-2)->innertext;
+		$mode = trim($tr->find('td',3)->plaintext);
+		if($ip!='127.0.0.1' and $ip!=$myip and $ip!='?' and $ip!=$_SERVER['REMOTE_ADDR'])
+			$ips[$vhost][]= array($ip, $req, $mode);
+	}
 
+	if( basename(__FILE__) == basename($_SERVER['PHP_SELF']) )	//utilizzo standalone di clients.php
+	{
+		foreach($ips as $dom=>$P)
+		{
+			echo $dom."<br>";
+			foreach($P as $p)
+				echo implode(' ',$p).'<br />';
+			echo "<hr>";
+		}//*/
+	echo $html;
+	}
+}
 ?>
